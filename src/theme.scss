@@ -1,0 +1,54 @@
+$thems: (
+    light:(bgColor:#fff,
+        textColor:#000,
+    ),
+    dark:(bgColor:#000,
+        textColor:#fff,
+    ),
+);
+$currentTheme: 'light'; //定义一个全局变量，切换主题
+
+@mixin useTheme() {
+
+    @each $key,
+    $value in $thems {
+        $currentTheme: $key !global; //局部变量覆盖全局变量
+
+        html[data-theme='#{$key}'] & {
+            @content
+        }
+    }
+
+
+}
+
+@function getVar($paramName) {
+    $themeMap: map-get($thems, $currentTheme );
+    @return map-get($themeMap, $paramName);
+}
+
+
+
+.item {
+    // 通用样式
+    width: 100px;
+    height: 100px;
+
+    // 针对主题的样式
+    @include useTheme {
+        background: getVar('bgColor');
+        color: getVar('textColor');
+    }
+}
+
+// css主题切换，兼容性不好，scss主题切换兼容性比较好；
+
+// html[data-theme='light'] .item {
+//     background: #fff;
+//     color: #000;
+// }
+
+// html[data-theme='dark'] .item {
+//     background: #000;
+//     color: #fff;
+// }
