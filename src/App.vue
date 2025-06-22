@@ -2,12 +2,22 @@
   <div id="app" data-theme="light">
     <!-- 路由出口 -->
     <router-view />
+    <h1>按钮别权限控制</h1>
+    <button v-permission="'add'">新增</button>
+    <button v-permission="'edit'">编辑</button>
+    <button v-permission="'view'">查看</button>
+    <button v-permission="'dele'">删除</button>
   </div>
 </template>
 
 <script>
+import permission from './directives/permission';
+
 export default {
   name: "App",
+  directives:{
+    permission
+  },
   data() {
     return {};
   },
