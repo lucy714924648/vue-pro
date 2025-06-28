@@ -55,10 +55,7 @@
         <el-dialog title="新增角色" :visible.sync="dialogVisible" width="30%" @close="addCancel">
             <el-form :model="ruleForm" :rules="roleRules" ref="roleForm" label-width="100px">
                 <el-form-item label="角色名称" prop="name">
-                    <template v-slot="{ row }">
-                        <el-input v-if="row.isEdit" v-model="ruleForm.name"></el-input>
-                        <span v-else>{{ row.name }}</span>
-                    </template>
+                    <el-input  v-model="ruleForm.name"></el-input>
                 </el-form-item>
                 <el-form-item label="启用" prop="state">
                     <el-switch v-model="ruleForm.state" :active-value="1" :inactive-value="0"></el-switch>
@@ -193,6 +190,7 @@ export default {
         editConfirmBtn(row) {
             if (row.editRow.name && row.editRow.description) {
                 // 调用更新编辑角色接口
+                this.$message.success('编辑角色成功')
                 // 用editRow的数据更新row的数据
                 Object.assign(row, {
                     ...row.editRow,
