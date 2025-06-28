@@ -36,7 +36,7 @@ export default {
   // 在组件created钩子中监听
   created() {
     // console.log(this.$router.options.routes[0].children);
-    console.log(this.$store);
+    // console.log(this.$store);
     window.addEventListener("popstate", this.handlePopState);
   },
 

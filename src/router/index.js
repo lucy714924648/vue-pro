@@ -19,6 +19,11 @@ const routes = [
                 component: About
             },
             {
+                path: '/role',
+                name: 'Role',
+                component: () => import('../views/Role/index.vue')
+            },
+            {
                 path: '/slot',
                 name: 'SlotComp',
                 component: SlotComp

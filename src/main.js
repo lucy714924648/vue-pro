@@ -5,9 +5,13 @@ import VueAxios from 'vue-axios'
 import router from './router'
 import store from './store/index'
 
-Vue.use(VueAxios, axios)
-Vue.config.productionTip = false
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
+Vue.use(VueAxios, axios)
+Vue.use(ElementUI);
+
+Vue.config.productionTip = false
 Vue.config.devtools = true;
 // 仅在生产环境禁用调试工具
 // Vue.config.devtools = process.env.NODE_ENV !== 'production'
