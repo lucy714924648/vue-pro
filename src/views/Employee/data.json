@@ -1,0 +1,30 @@
+{
+    "success": true,
+    "code": 200,
+    "data": {
+        "total": 10,
+        "rows": [
+            {
+                "id": 1,
+                "staffPhoto": "https://example.com/photo1.jpg",
+                "mobile": "13800138000",
+                "username": "zhangsan",
+                "formOfEmployment": "full_time",
+                "workNumber": "W001",
+                "departmentName": "Development",
+                "timeOfEntry": "2023-01-01"
+            },
+             {
+                "id": 2,
+                "staffPhoto": "https://example.com/photo1.jpg",
+                "mobile": "13800138000",
+                "username": "zhangsan",
+                "formOfEmployment": "full_time",
+                "workNumber": "W001",
+                "departmentName": "Development",
+                "timeOfEntry": "2023-01-01"
+            }
+        ]
+    },
+    "message": "Request successful"
+}

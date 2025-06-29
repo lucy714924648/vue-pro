@@ -4,6 +4,8 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home/index.vue'
 import About from '../views/About/index.vue'
 import SlotComp from '../views/SlotComp/index.vue'
+import Employee from '../views/Employee/index.vue'
+
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,22 @@ const routes = [
                 path: '/role',
                 name: 'Role',
                 component: () => import('../views/Role/index.vue')
+            },
+            {
+                path: '/department',
+                name: 'Department',
+                component: () => import('../views/Department/index.vue')
+            },
+            {
+                path: '/employee',
+                name: 'Employee',
+                component: Employee,
+                children: []
+            },
+            {
+                path: '/employee/detail/:id?',
+                name: 'Detail',
+                component: () => import('../views/Employee/Detail.vue'),
             },
             {
                 path: '/slot',

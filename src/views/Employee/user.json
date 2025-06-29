@@ -1,0 +1,205 @@
+{
+    "success": true,
+    "data": [
+        {
+            "id": 1,
+            "pid": 0,
+            "name": "集团总部",
+            "code": "JTZB",
+            "managerId": 1,
+            "managerName": "张总",
+            "introduce": "集团核心管理部门",
+            "createTime": "2022-10-26 17:13:37"
+        },
+        {
+            "id": 2,
+            "pid": 1,
+            "name": "行政部",
+            "code": "XZB",
+            "managerId": 2,
+            "managerName": "李华",
+            "introduce": "负责行政事务",
+            "createTime": "2022-10-26 17:13:38"
+        },
+        {
+            "id": 3,
+            "pid": 1,
+            "name": "市场部",
+            "code": "SCB",
+            "managerId": 3,
+            "managerName": "王强",
+            "introduce": "开展市场推广",
+            "createTime": "2022-10-26 17:13:39"
+        },
+        {
+            "id": 4,
+            "pid": 2,
+            "name": "车辆管理组",
+            "code": "CLGLZ",
+            "managerId": 4,
+            "managerName": "赵刚",
+            "introduce": "管理集团车辆",
+            "createTime": "2022-10-26 17:13:40"
+        },
+        {
+            "id": 5,
+            "pid": 3,
+            "name": "线上营销组",
+            "code": "XSYXZ",
+            "managerId": 5,
+            "managerName": "孙悦",
+            "introduce": "负责线上推广",
+            "createTime": "2022-10-26 17:13:41"
+        },
+        {
+            "id": 6,
+            "pid": 1,
+            "name": "研发部",
+            "code": "YFB",
+            "managerId": 6,
+            "managerName": "陈宇",
+            "introduce": "专注产品研发",
+            "createTime": "2022-10-26 17:13:42"
+        },
+        {
+            "id": 7,
+            "pid": 6,
+            "name": "前端研发组",
+            "code": "QDYFZ",
+            "managerId": 7,
+            "managerName": "吴磊",
+            "introduce": "前端技术开发",
+            "createTime": "2022-10-26 17:13:43"
+        },
+        {
+            "id": 8,
+            "pid": 6,
+            "name": "后端研发组",
+            "code": "HDYFZ",
+            "managerId": 8,
+            "managerName": "郑涛",
+            "introduce": "后端系统搭建",
+            "createTime": "2022-10-26 17:13:44"
+        },
+        {
+            "id": 9,
+            "pid": 1,
+            "name": "财务部",
+            "code": "CWB",
+            "managerId": 9,
+            "managerName": "钱丽",
+            "introduce": "财务核算管理",
+            "createTime": "2022-10-26 17:13:45"
+        },
+        {
+            "id": 10,
+            "pid": 9,
+            "name": "预算组",
+            "code": "YSZ",
+            "managerId": 10,
+            "managerName": "冯凯",
+            "introduce": "编制财务预算",
+            "createTime": "2022-10-26 17:13:46"
+        },
+        {
+            "id": 11,
+            "pid": 9,
+            "name": "核算组",
+            "code": "HSZ",
+            "managerId": 11,
+            "managerName": "袁芳",
+            "introduce": "财务数据核算",
+            "createTime": "2022-10-26 17:13:47"
+        },
+        {
+            "id": 12,
+            "pid": 1,
+            "name": "人事部",
+            "code": "RSB",
+            "managerId": 12,
+            "managerName": "周敏",
+            "introduce": "人事管理工作",
+            "createTime": "2022-10-26 17:13:48"
+        },
+        {
+            "id": 13,
+            "pid": 12,
+            "name": "招聘组",
+            "code": "ZPYZ",
+            "managerId": 13,
+            "managerName": "吴悠",
+            "introduce": "负责人员招聘",
+            "createTime": "2022-10-26 17:13:49"
+        },
+        {
+            "id": 14,
+            "pid": 12,
+            "name": "培训组",
+            "code": "PXZ",
+            "managerId": 14,
+            "managerName": "郑雪",
+            "introduce": "员工培训组织",
+            "createTime": "2022-10-26 17:13:50"
+        },
+        {
+            "id": 15,
+            "pid": 1,
+            "name": "法务部",
+            "code": "FWB",
+            "managerId": 15,
+            "managerName": "郭峰",
+            "introduce": "处理法务事务",
+            "createTime": "2022-10-26 17:13:51"
+        },
+        {
+            "id": 16,
+            "pid": 15,
+            "name": "合同审核组",
+            "code": "HTSHZ",
+            "managerId": 16,
+            "managerName": "谢辉",
+            "introduce": "审核各类合同",
+            "createTime": "2022-10-26 17:13:52"
+        },
+        {
+            "id": 17,
+            "pid": 15,
+            "name": "合规组",
+            "code": "HGZ",
+            "managerId": 17,
+            "managerName": "苏瑶",
+            "introduce": "确保企业合规",
+            "createTime": "2022-10-26 17:13:53"
+        },
+        {
+            "id": 18,
+            "pid": 1,
+            "name": "客服部",
+            "code": "KFB",
+            "managerId": 18,
+            "managerName": "秦宇",
+            "introduce": "服务客户咨询",
+            "createTime": "2022-10-26 17:13:54"
+        },
+        {
+            "id": 19,
+            "pid": 18,
+            "name": "线上客服组",
+            "code": "XSKFZ",
+            "managerId": 19,
+            "managerName": "许薇",
+            "introduce": "线上客户服务",
+            "createTime": "2022-10-26 17:13:55"
+        },
+        {
+            "id": 20,
+            "pid": 18,
+            "name": "线下客服组",
+            "code": "XHKFZ",
+            "managerId": 20,
+            "managerName": "崔明",
+            "introduce": "线下客户对接",
+            "createTime": "2022-10-26 17:13:56"
+        }
+    ]
+}

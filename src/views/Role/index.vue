@@ -55,7 +55,7 @@
         <el-dialog title="新增角色" :visible.sync="dialogVisible" width="30%" @close="addCancel">
             <el-form :model="ruleForm" :rules="roleRules" ref="roleForm" label-width="100px">
                 <el-form-item label="角色名称" prop="name">
-                    <el-input  v-model="ruleForm.name"></el-input>
+                    <el-input v-model="ruleForm.name"></el-input>
                 </el-form-item>
                 <el-form-item label="启用" prop="state">
                     <el-switch v-model="ruleForm.state" :active-value="1" :inactive-value="0"></el-switch>
@@ -147,9 +147,10 @@ export default {
             //调用删除接口
             this.$message.success('删除成功')
             // 判断是不是这一页的最后一条数据
-            if (this.tableData.length === 1) {
-                this.page.currentPage--
-            }
+            // if (this.tableData.length === 1) {
+            //     this.page.currentPage--
+            // }
+            this.tableData.length === 1 && this.page.currentPage--
             //更新数据,调用更新列表数据
 
         },
