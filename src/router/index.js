@@ -1,75 +1,61 @@
 // src/router/index.js
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home/index.vue'
-import About from '../views/About/index.vue'
-import SlotComp from '../views/SlotComp/index.vue'
-import Employee from '../views/Employee/index.vue'
-
+import Layout from "../views/Layout/index.vue"
+import Department from "./modules/department"
+import Employee from "./modules/employee"
+import List from "./modules/list"
+import Details from "./modules/details"
+import Role from "./modules/role"
 
 Vue.use(VueRouter)
-
-const routes = [
+const fixedRoutes = [
+    { path: '/login', name: "login", component: () => (import('../views/Login/index.vue')) },
     {
-        path: '/',
-        name: 'Home',
-        component: Home,
+        path: "",
+        component: Layout,
+        redirect: "/dashboard",
         children: [
             {
-                path: '/about',
-                name: 'About',
-                component: About
-            },
-            {
-                path: '/role',
-                name: 'Role',
-                component: () => import('../views/Role/index.vue')
-            },
-            {
-                path: '/department',
-                name: 'Department',
-                component: () => import('../views/Department/index.vue')
-            },
-            {
-                path: '/employee',
-                name: 'Employee',
-                component: Employee,
-                children: []
-            },
-            {
-                path: '/employee/detail/:id?',
-                name: 'Detail',
-                component: () => import('../views/Employee/Detail.vue'),
-            },
-            {
-                path: '/slot',
-                name: 'SlotComp',
-                component: SlotComp
-            },
-            // 懒加载方式
-            {
-                path: '/list',
-                name: 'List',
-                component: () => import('../views/List/index.vue')
-            },
-            {
-                path: '/details',
-                name: 'Details',
-                component: () => import('../views/Details/index.vue')
+                path: "/dashboard",
+                name: "Dashboard",
+                component: () => (import("../views/Dashboard/index.vue"))
             }
         ]
     },
-
-
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('../views/404/index.vue')
+    }
+]
+const dynamicRoutes = [
+    Employee,
+    Department,
+    Role,
+    Details,
+    List
 ]
 
 const router = new VueRouter({
     mode: 'history',  // 使用history模式
     base: process.env.BASE_URL,
-    routes
+    routes: fixedRoutes
 })
+// 添加动态路由
+// 注意：所有子路由 path 不要以 / 开头，避免绝对路径问题
+// 只添加一次
+
+dynamicRoutes.forEach(route => {
+    router.addRoute(route)
+})
+// 兜底路由，直接渲染404组件
+router.addRoute({
+    path: '*',
+    component: () => import('../views/404/index.vue')
+})
+
 let startTime = Date.now();
-//js注释
 /**
  * 页面停留时间
  * @author jiajia<712@mail.com>
@@ -95,7 +81,6 @@ const countTime = (to, from) => {
     startTime = Date.now();
     console.log("--==============分割线========-");
     return (currentTime - startTime) / 1000
-
 }
 // 记录路由历史
 const history = window.sessionStorage
@@ -105,7 +90,6 @@ history.setItem('/', 0)
 router.beforeEach((to, from, next) => {
     const toIndex = history.getItem(to.path)
     const fromIndex = history.getItem(from.path)
-
     if (toIndex) {
         if (!fromIndex || parseInt(toIndex) > parseInt(fromIndex)) {
             // 前进

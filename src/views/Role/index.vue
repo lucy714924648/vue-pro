@@ -34,7 +34,7 @@
                     </template>
                     <!-- 非编辑状态  显示的按钮  -->
                     <template v-else>
-                        <el-button size="mini" type="text">分配权限</el-button>
+                        <el-button size="mini" type="text" @click="permissionClick">分配权限</el-button>
                         <el-button size="mini" type="text" @click="handleEdit($index, row)">编辑</el-button>
                         <el-popconfirm title="这是一段内容确定删除吗？" @onConfirm="handleDelete(row)">
 
@@ -79,9 +79,17 @@
             </span> -->
 
         </el-dialog>
+        <!-- 分配角色弹层 -->
+        <el-dialog :visible.sync="showPermissionDialog" title="分配权限">
+            <el-tree :props="defaultProps" :data="permissionList" default-expand-all show-checkbox
+                @check-change="handleCheckChange">
+            </el-tree>
+        </el-dialog>
     </div>
 </template>
 <script>
+import { arrayToTree } from '../Employee/arrayToTree.js'
+import { generateDepartmentData } from "../Employee/employee"
 export default {
     data() {
         return {
@@ -107,7 +115,13 @@ export default {
                         required: true, message: '不能为空', trigger: 'blur'
                     }
                 ]
-            }
+            },
+            showPermissionDialog: false,
+            permissionList: [],
+            defaultProps: {
+                label: 'name',
+                children: 'children'
+            },
         }
     },
     created() {
@@ -146,11 +160,9 @@ export default {
         handleDelete(row) {
             //调用删除接口
             this.$message.success('删除成功')
-            // 判断是不是这一页的最后一条数据
-            // if (this.tableData.length === 1) {
-            //     this.page.currentPage--
-            // }
-            this.tableData.length === 1 && this.page.currentPage--
+            // 判断是不是这一页的最后一条数据. 
+            if (this.tableData.length === 1 && this.page.currentPage > 1) this.page.currentPage--
+            // this.tableData.length === 1 && this.page.currentPage--
             //更新数据,调用更新列表数据
 
         },
@@ -201,6 +213,16 @@ export default {
             } else {
                 this.$message.error('角色名或者描述不能为空')
             }
+        },
+        // 打开分配权限弹层
+        permissionClick() {
+            this.showPermissionDialog = true
+            this.permissionList = generateDepartmentData(50)
+            console.log(this.permissionList);
+
+        },
+        handleCheckChange(a, b, c) {
+
         }
     }
 }

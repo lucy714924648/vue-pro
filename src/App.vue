@@ -1,7 +1,9 @@
 <template>
   <div id="app" data-theme="light">
-    <!-- 路由出口 -->
-    <router-view />
+    <keep-alive>
+      <router-view v-if="$route.meta.keepAlive" ></router-view>
+    </keep-alive>
+    <router-view v-if="!$route.meta.keepAlive"></router-view>
     <h1>按钮别权限控制</h1>
     <button v-permission="'add'">新增</button>
     <button v-permission="'edit'">编辑</button>
@@ -15,7 +17,7 @@ import permission from './directives/permission';
 
 export default {
   name: "App",
-  directives:{
+  directives: {
     permission
   },
   data() {
@@ -30,6 +32,7 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 img {
   // 取vw和vh最小的值（视口宽高）
   // display: inline-block;

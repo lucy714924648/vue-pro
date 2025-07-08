@@ -44,15 +44,15 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.meta.isBack) {
-        // 后退不刷新
-        console.log("后退操作");
+      console.log('route changed',from);
+      if (from.path==='/details') {
+        console.log('后退不刷新');
+        return
       } else {
-        // 前进刷新
         console.log("前进操作");
-        this.refreshData(); // 刷新数据的方法
+        this.refreshData();
       }
-    },
+    }
   },
   methods: {
     refreshData() {

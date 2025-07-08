@@ -4,7 +4,7 @@
  * @param {Number} rootValue 根节点
  * @returns 
  */
-function arrayToTree(arr, rootValue) {
+export function arrayToTree(arr, rootValue) {
     const result = []
     arr.forEach(item => {
         //找到根节点，pid=0的
@@ -20,4 +20,16 @@ function arrayToTree(arr, rootValue) {
     });
     return result
 
+}
+
+function getTree(arrList, rootId) {
+    const result = []
+    arrList.forEach((item) => {
+        if (item.pid === rootId) {
+            result.push(item)
+            const children = getTree(arrList, item.id)
+            if (children.length > 0) item.children = children
+        }
+
+    })
 }

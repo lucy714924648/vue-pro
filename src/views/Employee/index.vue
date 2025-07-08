@@ -19,18 +19,29 @@
                 </el-row>
                 <!-- table -->
                 <el-table :data="tableData">
-                    <el-table-column label="头像" prop="staffPhoto" align="center"></el-table-column>
+                    <el-table-column label="头像" prop="staffPhoto" align="center">
+                        <template v-slot="{ row }">
+                            <el-avatar v-if="row.staffPhoto" :src="row.staffPhoto" :size="30"></el-avatar>
+                            <span v-else>{{ row.username.charAt(0) }}</span>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="姓名" prop="username"></el-table-column>
                     <el-table-column label="手机号" prop="mobile" sortable></el-table-column>
                     <el-table-column label="工号" prop="workNumber" sortable></el-table-column>
-                    <el-table-column label="聘用形式" prop="formOfEmployment"></el-table-column>
+                    <el-table-column label="聘用形式" prop="formOfEmployment">
+                        <template v-slot="{ row }">
+                            <span v-if="row.formOfEmployment === 1">非正式</span>
+                            <span v-else-if="row.formOfEmployment === 2">正式</span>
+                            <span v-else>无</span>
+                        </template>
+                    </el-table-column>
                     <el-table-column label="部门" prop="departmentName"></el-table-column>
                     <el-table-column label="入职时间" prop="timeOfEntry" sortable></el-table-column>
                     <el-table-column label="操作" width="280px">
                         <template v-slot="{ row }">
                             <el-button size="mini" type="text"
                                 @click="$router.push(`/employee/detail/${row.id}`)">查看</el-button>
-                            <el-button size="mini" type="text">角色</el-button>
+                            <el-button size="mini" type="text" @click="roleClick(row.id)">角色</el-button>
                             <el-button size="mini" type="text">删除</el-button>
                         </template>
                     </el-table-column>
@@ -46,6 +57,17 @@
         </div>
         <!-- 导入弹层 -->
         <ImportExcel :showExcelDialog.sync="showExcelDialog" @updateSucess="updateSucess"></ImportExcel>
+        <!-- 分配角色弹层 -->
+        <el-dialog title="分配角色" :visible.sync="showRoleDialog">
+            <el-checkbox-group v-model="roleIdsList">
+                <el-checkbox v-for="item in roleList" :key="item.id" :label="item.id">{{ item.roleName }}</el-checkbox>
+            </el-checkbox-group>
+
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="showRoleDialog = false">取 消</el-button>
+                <el-button type="primary" @click="roleDialogClick">确 定</el-button>
+            </span>
+        </el-dialog>
     </div>
 </template>
 <script>
@@ -94,6 +116,10 @@ export default {
             },
             tableData: [],
             showExcelDialog: false,
+            showRoleDialog: false,//展示分配角色弹层
+            currentRoleId: null,//员工的角色id
+            roleIdsList: [],//员工所具有的角色id数组
+            roleList: [],//员工所就有的角色list
         }
     },
     created() {
@@ -104,8 +130,6 @@ export default {
         })
         // 输出生成的数据
         this.tableData = this.generateEmployees(30);
-
-
     },
     methods: {
         // 加防抖
@@ -130,7 +154,7 @@ export default {
                     "staffPhoto": `https://picsum.photos/id/${id}/200/200`,
                     "mobile": `13800138${String(id).padStart(4, '0')}`,
                     "username": `user${id}`,
-                    "formOfEmployment": employmentTypes[Math.floor(Math.random() * employmentTypes.length)],
+                    "formOfEmployment": Math.floor(Math.random() * 2) + 1, // 生成1或2
                     "workNumber": `W${String(id).padStart(3, '0')}`,
                     "departmentName": departments[Math.floor(Math.random() * departments.length)],
                     "timeOfEntry": `202${Math.floor(Math.random() * 3)}-${String(Math.floor(Math.random() * 12) + 1).padStart(2, '0')}-${String(Math.floor(Math.random() * 28) + 1).padStart(2, '0')}`
@@ -139,6 +163,7 @@ export default {
         },
         // 切换部门
         currentChange(node) {
+            //记录当前部门id
             this.queryParams.departmentId = node.id
             //更新当前页是第一页
             this.queryParams.currentPage = 1
@@ -156,10 +181,24 @@ export default {
             // FileSaver.saveAs(Blob对象,文件名称). 保存到本地
             // FileSaver.saveAs(Blob,'员工信息表.xlsx')
         },
-        updateSucess(){
+        updateSucess() {
             //上传文件成功后
             //调用获取列表页数据接口
-        }
+        },
+        //打开分配角色弹层
+        roleClick(id) {
+            this.showRoleDialog = true
+            this.currentRoleId = id
+            //模拟接口获取员工角色
+            this.roleList = new Array(10).fill(0).map((_, i) => ({ id: i + 1, roleName: `管理员${i}` }))
+            this.roleIdsList = [1, 2, 3, 4]
+
+        },
+        //分配角色确认
+        roleDialogClick() {
+            //调分配角色接口
+        },
+        
     }
 }
 </script>
