@@ -1,14 +1,13 @@
 
 import Layout from "../../views/Layout/index.vue"
 export default {
-    path: "/details",
-    // name: "Details",
+    path: "/home",
     component: Layout,
     children: [
         {
             path: "",
-            name: "Details",
-            component: () => import("../../views/Details/index.vue")
+            name: "Home",
+            component: () => import("../../views/Home/index.vue")
         }
     ]
 }

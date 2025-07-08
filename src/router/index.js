@@ -7,10 +7,11 @@ import Employee from "./modules/employee"
 import List from "./modules/list"
 import Details from "./modules/details"
 import Role from "./modules/role"
+import Home from "./modules/home"
+
 
 Vue.use(VueRouter)
 const fixedRoutes = [
-    { path: '/login', name: "login", component: () => (import('../views/Login/index.vue')) },
     {
         path: "",
         component: Layout,
@@ -23,6 +24,7 @@ const fixedRoutes = [
             }
         ]
     },
+    { path: '/login', name: "login", component: () => (import('../views/Login/index.vue')) },
     {
         path: '/404',
         name: '404',
@@ -34,7 +36,8 @@ const dynamicRoutes = [
     Department,
     Role,
     Details,
-    List
+    List,
+    Home
 ]
 
 const router = new VueRouter({
@@ -46,14 +49,6 @@ const router = new VueRouter({
 // 注意：所有子路由 path 不要以 / 开头，避免绝对路径问题
 // 只添加一次
 
-dynamicRoutes.forEach(route => {
-    router.addRoute(route)
-})
-// 兜底路由，直接渲染404组件
-router.addRoute({
-    path: '*',
-    component: () => import('../views/404/index.vue')
-})
 
 let startTime = Date.now();
 /**
@@ -82,33 +77,27 @@ const countTime = (to, from) => {
     console.log("--==============分割线========-");
     return (currentTime - startTime) / 1000
 }
-// 记录路由历史
-const history = window.sessionStorage
-let historyCount = history.getItem('count') * 1 || 0
-history.setItem('/', 0)
+
+dynamicRoutes.forEach(route => {
+    if (route && typeof route === 'object' && route.path) {
+        router.addRoute(route)
+    } else {
+        console.warn('无效路由配置', route)
+    }
+})
+// 兜底路由，直接渲染404组件
+router.addRoute({
+    path: '*',
+    component: () => import('../views/404/index.vue')
+})
+console.log(router.getRoutes());
 
 router.beforeEach((to, from, next) => {
-    const toIndex = history.getItem(to.path)
-    const fromIndex = history.getItem(from.path)
-    if (toIndex) {
-        if (!fromIndex || parseInt(toIndex) > parseInt(fromIndex)) {
-            // 前进
-            to.meta.isBack = false
-        } else {
-            // 后退
-            to.meta.isBack = true
-        }
-    } else {
-        // 新页面
-        ++historyCount
-        history.setItem('count', historyCount)
-        to.meta.isBack = false
-        history.setItem(to.path, historyCount)
-    }
-    //埋点记录页面停留时间
+
+    // 埋点记录页面停留时间
     const timeOff = countTime(to, from);
     console.log(timeOff);
-    next()
+  next()
 })
 
 export default router

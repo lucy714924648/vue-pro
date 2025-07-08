@@ -15,7 +15,7 @@
     </header>
     <div>
       <ul>
-        <li v-for="item in $router.options.routes[0].children" :key="item.name">
+        <li v-for="item in $router.getRoutes()" :key="item.name">
           {{ item.name }}
           <router-link :to="{ name: item.name }">{{ item.name }}</router-link>
           <button @click="addAliveHandler(item.name)">+</button>
@@ -35,30 +35,20 @@ export default {
   name: "Home",
   // 在组件created钩子中监听
   created() {
-    // console.log(this.$router.options.routes[0].children);
-    // console.log(this.$store);
-    window.addEventListener("popstate", this.handlePopState);
+    console.log(this.$router.getRoutes());
+    // console.log(this.$store.state.tabs.pageNames);
+    // $store.state.tabs.pageName
   },
 
-  destroyed() {
-    window.removeEventListener("popstate", this.handlePopState);
-  },
 
   methods: {
     addAliveHandler(pageName) {
+      console.log('pageName',pageName);
+      
       this.$store.commit("tabs/addPage", pageName);
     },
     removeAliveHandler(pageName) {
       this.$store.commit("tabs/removePage", pageName);
-    },
-    handlePopState(event) {
-      if (event.state) {
-        // 后退操作
-        console.log("后退");
-      } else {
-        // 前进操作
-        console.log("前进");
-      }
     },
   },
 };

@@ -3,7 +3,7 @@
     <keep-alive>
       <router-view v-if="$route.meta.keepAlive" ></router-view>
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <router-view v-if="!$route.meta?.keepAlive"></router-view>
     <h1>按钮别权限控制</h1>
     <button v-permission="'add'">新增</button>
     <button v-permission="'edit'">编辑</button>

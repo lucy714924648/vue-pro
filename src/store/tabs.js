@@ -1,19 +1,23 @@
-export default {
-    namespace: true,
-    state: {
-        pageNames: []
-    },
-    mutations: {
-        addPage(state, newValue) {
-            if (!state.pageNames.includes(newValue)) {
-                state.pageNames.push(newValue)
-            }
-        },
-        removePage(state, pageName) {
-            const index = state.pageNames.indexOf(pageName);
-            if (index >= 0) {
-                state.pageNames.splice(index, 1);
-            }
-        }
+const state = {
+  pageName: []
+}
+
+const mutations = {
+  addPage(state, pageName) {
+    if (!state.pageName.includes(pageName)) {
+      state.pageName.push(pageName)
     }
+  },
+  removePage(state, pageName) {
+    const idx = state.pageName.indexOf(pageName)
+    if (idx !== -1) {
+      state.pageName.splice(idx, 1)
+    }
+  }
+}
+
+export default {
+  namespaced: true,
+  state,
+  mutations
 }

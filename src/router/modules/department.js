@@ -1,7 +1,7 @@
 import Layout from "../../views/Layout/index.vue"
 
 export default {
-    path: "",
+    path: "/department",
     // name: "Department",
     component: Layout,
     children: [

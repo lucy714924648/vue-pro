@@ -2,11 +2,11 @@
 import Layout from "../../views/Layout/index.vue"
 
 export default {
-    path: "",
+    path: "/list",
     component: Layout,
     children: [
         {
-            path: "/list",
+            path: "",
             name: "List",
             meta:{
                 keepAlive: true 

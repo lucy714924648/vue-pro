@@ -5,7 +5,6 @@
             <Nav></Nav>
             <AppMain></AppMain>
         </div>
-           <!-- <router-view></router-view> -->
     </div>
 </template>
 <script>
