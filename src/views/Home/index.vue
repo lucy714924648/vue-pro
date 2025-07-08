@@ -4,18 +4,17 @@
     <h1>Home Page</h1>
     <header>
       <p>
-        <ul>
-        <li v-for="item in $store.state.tabs.pageName" :key="item">
-          {{ item }}
+        <ul style="border: 1px salmon;">
+        <li v-for="item in $store.state.tabs.pageName" :key="item" style="display: inline-block;margin-left: 10px;border:1px solid aqua;padding:4px">
           <router-link :to="{ name: item }">{{ item}}</router-link>
-          <button @click="removeAliveHandler(item)">-</button>
+          <el-button type="primary" size="mini" @click="removeAliveHandler(item)">-</el-button>
         </li>
       </ul>
       </p>
     </header>
     <div>
       <ul>
-        <li v-for="item in $router.getRoutes()" :key="item.name">
+        <li v-for="item in $router.getRoutes()" :key="item.name" style="border: 1px solid;">
           {{ item.name }}
           <router-link :to="{ name: item.name }">{{ item.name }}</router-link>
           <button @click="addAliveHandler(item.name)">+</button>
